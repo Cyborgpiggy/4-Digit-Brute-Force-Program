@@ -25,11 +25,11 @@ import mysql.connector  # Imports MySQL connector for pycharm
 import shutil
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-MODEL_FILENAME = "C:/Users/Ryan DeHaan/PycharmProjects/chromedriver_win32/captcha_model.hdf5"
-MODEL_LABELS_FILENAME = "C:/Users/Ryan DeHaan/PycharmProjects/chromedriver_win32/model_labels.dat"
-CAPTCHA_IMAGE_FOLDER = "C:/Users/Ryan DeHaan/PycharmProjects/chromedriver_win32/generated_captcha_images"
-CAPTCHA_IMAGE = "C:/Users/Ryan DeHaan/PycharmProjects/chromedriver_win32/screenshot.png"
-GuessedPasswords = "C:/Users/Ryan DeHaan/PycharmProjects/chromedriver_win32/GuessedPasswords"
+MODEL_FILENAME = "C:/Users//PycharmProjects/chromedriver_win32/captcha_model.hdf5"
+MODEL_LABELS_FILENAME = "C:/Users//PycharmProjects/chromedriver_win32/model_labels.dat"
+CAPTCHA_IMAGE_FOLDER = "C:/Users//PycharmProjects/chromedriver_win32/generated_captcha_images"
+CAPTCHA_IMAGE = "C:/Users//PycharmProjects/chromedriver_win32/screenshot.png"
+GuessedPasswords = "C:/Users//PycharmProjects/chromedriver_win32/GuessedPasswords"
 '''Connects to the MySQL database "python_db" with user 'admin' and the password '' '''
 mydb = mysql.connector.connect(host='localhost', database='python_db', user='admin', password='')
 mycursor = mydb.cursor()
@@ -49,8 +49,8 @@ print("Tried Passwords:")
 '''While loop that is infinite and will never stop unless Error occurs or program stopped'''
 while x == 1:
     '''Declares file locations to identifiers'''
-    filepath = "C:/Users/Ryan DeHaan/PycharmProjects/chromedriver_win32/Email List"
-    backupfile = "C:/Users/Ryan DeHaan/PycharmProjects/chromedriver_win32/Users"
+    filepath = "C:/Users//PycharmProjects/chromedriver_win32/Email List"
+    backupfile = "C:/Users//PycharmProjects/chromedriver_win32/Users"
     '''When the file(Email List) is open it will set all file commands as f. In the file it will
                     read all the line in the file then it will removes all the new line commands("\n") from the list'''
     with open(filepath) as f:
